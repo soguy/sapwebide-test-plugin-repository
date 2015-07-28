@@ -1,0 +1,71 @@
+{
+	"name": "sampleplugin",
+	"description": "Sample Plugin",
+	"i18n": "sampleplugin/i18n/i18n",
+	"requires": {
+		"services": [
+			"usernotification",
+			"log",
+			"command",
+			"commandGroup"
+		]
+	},
+	"provides": {
+		"services": {
+			"sample": {
+				"implements": "sampleplugin.service.Sample",
+				"module": "sampleplugin/service/Sample"
+			}
+		},
+
+		"interfaces": {
+			"sampleplugin.service.Sample": "sampleplugin/service/Sample"
+		}
+	},
+	"configures": {
+		"services": {
+			"command:commands": [
+				{
+					"id": "sampleplugin.helloWorld",
+					"label": "{i18n>command_helloWorld}",
+					"service": "sampleplugin/command/HelloWorld"
+				}
+			],
+
+			"commandGroup:groups": [
+				{
+					"id": "tools.sample",
+					"label": "{i18n>commandgroup_sample}"
+				},
+				{
+					"id": "tools.sample.helloWorld"
+				}
+			],
+
+			"commandGroup:items": [
+				{
+					"parent": "tools",
+					"type": "menu",
+					"group": "tools.sample",
+					"prio": 100
+				},
+				{
+					"parent": "tools.sample",
+					"type": "inline",
+					"group": "tools.sample.helloWorld",
+					"prio": 10
+				},
+				{
+					"parent": "tools.sample.helloWorld",
+					"type": "action",
+					"command": "sampleplugin.helloWorld",
+					"prio": 10
+				}
+			]
+		}
+	},
+
+	"subscribes": {
+		"sample:notificationDisplayed": "sample:onAfterNotificationDisplayed"
+	}
+}

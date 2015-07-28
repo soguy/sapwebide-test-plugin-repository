@@ -1,0 +1,11 @@
+{
+	"name" : "Web IDE Plugins Repository Catalog",
+	"plugins" : [
+		{
+			"name": "com.sap.plugin.sample",
+			"description": "Sample Plugin",
+			"path" : "/com.sap.plugin.sample",
+			"version" : "1.0.0"
+		}
+	]
+}
