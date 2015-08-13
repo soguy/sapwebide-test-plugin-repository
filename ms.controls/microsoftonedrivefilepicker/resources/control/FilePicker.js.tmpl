@@ -1,0 +1,76 @@
+/*
+Add the following attribute to your UI5 XML view element
+xmlns:ms="{{controlNamespace}}.control"
+
+Add the following element to add the file picker
+<ms:FilePicker text="Upload from OneDrive"/>
+*/
+
+jQuery.sap.require("sap.ui.commons.Button");
+jQuery.getScript("//www.o365.io/fp/page/file_picker.js");
+jQuery.sap.declare("{{controlNamespace}}.control.FilePicker");
+sap.ui.commons.Button.extend("{{controlNamespace}}.control.FilePicker", { // call the new Control type "HoverButton" 
+            // and let it inherit from sap.ui.commons.Button
+	metadata: {
+		events: {
+			"hover" : {}  // this Button has also a "hover" event, in addition to "press" of the normal Button
+		}
+	},
+		    // the hover event handler:
+	onclick : function(evt) {   // is called when the Button is hovered - no event registration required
+        OneDrivePro.Open({
+            LinkType: "real",
+            MultiSelect: false,
+            FolderSelect: false
+        }, handlePickResult, handlePickCancel);
+
+        function handlePickResult(resultObj) {
+            var errormsg = "";
+            if (resultObj.error) {
+                console.error(resultObj.error);
+            } else {
+                try {
+                    var payloadObj = resultObj.payload;
+                    if ({}.toString.call(payloadObj).slice(8, -1) !== 'Object') {
+                        payloadObj = JSON.parse(payloadObj);
+                    }
+                    var container = document.getElementById('playground');
+                    container = container ? container : document.body;
+                    var pre = document.createElement('pre');
+                    pre.textContent = JSON.stringify(payloadObj, null, 4);
+                    container.appendChild(pre);
+                    pre.setAttribute('id', "result_description");
+                    var href = document.createElement('a');
+                    href.setAttribute('href', payloadObj.link);
+                    href.textContent = payloadObj.name;
+                    container.appendChild(href);
+                    alert(pre.textContent);
+                } catch (e) {
+                    errormsg += e;
+                }
+            }
+        }
+
+        function handlePickCancel(resultObj) {
+            var errormsg = "";
+            if (resultObj.error) {
+                console.error(resultObj.error);
+            } else {
+                try {
+                    var payloadObj = resultObj.payload;
+                    var container = document.getElementById('playground');
+                    container = container ? container : document.body;
+                    var pre = document.createElement('pre');
+                    pre.textContent = JSON.stringify(payloadObj, null, 4);
+                    container.appendChild(pre);
+                    pre.setAttribute('id', "result_description");
+                } catch (e) {
+                    errormsg += e;
+                }
+            }
+        }
+	},
+	renderer: {} // add nothing, just inherit the ButtonRenderer as is; 
+			// In this case (since the renderer is not changed) you could also specify this explicitly with:  renderer:"sap.ui.commons.ButtonRenderer"
+			// (means you reuse the ButtonRenderer instead of creating a new view
+});

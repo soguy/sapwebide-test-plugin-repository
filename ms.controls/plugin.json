@@ -1,0 +1,46 @@
+{
+    "name": "ms.controls",
+    "description": "Microsoft Controls for Fiori",
+    "i18n": "ms.controls/i18n/i18n",
+    "requires": {
+        "services": [
+            "template",
+            "templateCustomizationStep"
+        ]
+    },
+    "provides": {
+        "services": {},
+        "interfaces": {}
+    },
+    "configures": {
+        "services": {
+            "template:templates": [
+                {
+                    "id": "ms.controls.microsoftonedrivefilepicker",
+                    "template": "ms.controls/microsoftonedrivefilepicker/microsoftonedrivefilepicker",
+                    "name": "{i18n>Config_template_microsoftonedrivefilepicker_name}",
+                    "description": "{i18n>Config_template_microsoftonedrivefilepicker_desc}",
+                    "path": "ms.controls/microsoftonedrivefilepicker",
+                    "fileName": "resources.zip",
+                    "modelFileName": "model.json",
+                    "modelRoot": "microsoftonedrivefilepicker",
+                    "icon": "sap-icon://detail-view",
+                    "internalOnly": false,
+                    "category": "microsoftcontrolsforfiori",
+                    "wizardSteps": ["templateCustomizationStep"],
+                    "templateType": "component",
+                    "version": "1.0.0",
+                    "orderPriority": 1000
+                }
+            ],
+            "template:categories": [
+                {
+                    "id": "microsoftcontrolsforfiori",
+                    "name": "{i18n>Config_category_Microsoft_Controls_for_Fiori_name}",
+                    "description": "{i18n>Config_category_Microsoft_Controls_for_Fiori_desc}"
+                }
+            ]
+        }
+    },
+    "subscribes": {}
+}

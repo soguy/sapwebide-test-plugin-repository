@@ -1,0 +1,30 @@
+{
+	"datasource": {
+		"type": "odata",
+		"url": ""
+	},
+	"microsoftonedrivefilepicker": {
+		"parameters": {
+			"SampleTextField": {
+				"type": "string",
+				"value": "",
+				"wizard": {
+					"control": "TextField",
+					"required": false,
+					"title": "microsoftonedrivefilepicker_model_field_title"
+				}
+			}
+		},
+		"forms": [
+			{
+				"title": "microsoftonedrivefilepicker_model_form_title",
+				"groups": [
+					{
+						"title": "Configuration",
+						"parameters": ["@microsoftonedrivefilepicker.parameters.SampleTextField"]
+                }
+                ]
+            }
+        ]
+	}
+}

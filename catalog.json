@@ -6,6 +6,12 @@
 			"description": "Sample Plugin",
 			"path" : "/com.sap.plugin.sample",
 			"version" : "1.0.0"
+		},
+				{
+			"name": "Microsoft Controls for Fiori Apps",
+			"description": "Microsoft controls for Fiori apps such as OneDrive FilePicker",
+			"path" : "/ms.controls",
+			"version" : "1.0.0"
 		}
 	]
 }
