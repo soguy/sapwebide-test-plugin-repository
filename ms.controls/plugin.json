@@ -5,7 +5,9 @@
     "requires": {
         "services": [
             "template",
-            "templateCustomizationStep"
+            "templateCustomizationStep",
+            "ui5projecthandler",
+            "filesystem"
         ]
     },
     "provides": {

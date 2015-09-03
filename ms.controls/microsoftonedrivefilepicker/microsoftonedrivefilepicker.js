@@ -14,9 +14,14 @@ define({
 	 * @param model The template model as passed from the generation wizard based on the user selections.
 	 */
 	onBeforeTemplateGenerate: function(templateZip, model) {
- 	    var controlNamespace = model.componentPath.replace(/\//g, '.').slice(1);
- 	    model.controlNamespace = controlNamespace;
- 		return [templateZip, model];
+ 	    var that = this;
+ 	    return this.context.service.filesystem.documentProvider.getDocument(model.componentPath).then(
+ 	    	function(oTargetDoc) {
+ 	    		return that.context.service.ui5projecthandler.getAppNamespace(oTargetDoc).then(function(sAppNamespace){
+ 	    			model.controlNamespace = sAppNamespace;
+ 	    			return [templateZip, model];
+ 	    		}); 	
+ 	    	});
 	},
 
 	/**
