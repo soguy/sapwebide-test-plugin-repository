@@ -7,7 +7,7 @@
             "template",
             "templateCustomizationStep",
             "ui5projecthandler",
-            "filesystem"
+            "filesystem.documentProvider"
         ]
     },
     "provides": {
